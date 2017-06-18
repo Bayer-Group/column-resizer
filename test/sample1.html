@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample 1</title>
+</head>
+<body>
+<div class="react-bs-table-container">
+    <div class="react-bs-table-tool-bar">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8">
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-success hidden-print"><i
+                            class="glyphicon glyphicon-export"></i>Export to CSV
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <div class="form-group form-group-sm react-bs-table-search-form input-group input-group-sm">
+                    <div><input type="text" class="form-control" placeholder="Search"></div>
+                    <div class="dropdown btn-group">
+                        <button id="column-chooser" role="button" aria-haspopup="true" aria-expanded="false"
+                                type="button" class="dropdown-toggle btn btn-default"><span
+                                class="glyphicon glyphicon-th"></span> <span
+                                class="caret"></span></button>
+                        <ul role="menu" class="dropdown-menu" aria-labelledby="column-chooser">
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="Key" value="on">
+                                Key</label></a></li>
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="Location Name" value="on">
+                                Name</label></a></li>
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="Area" value="on">
+                                Value</label></a></li>
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="UOM" value="on">
+                                Type</label></a></li>
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="Project RL Critical Habitat"
+                                                                   value="on">Present</label></a></li>
+                            <li role="presentation" class=""><a role="menuitem" tabindex="-1" href="#"><label
+                                    class="checkbox-inline"><input type="checkbox" id="SRR" value="on">
+                                Reference</label></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"></div>
+        </div>
+    </div>
+    <div class="react-bs-table" style="height: 100%;">
+        <div class="react-bs-container-header table-header-wrapper">
+            <div class="grip-container" style="width: 1366px;">
+                <div class="grip-handle" style="left: 39px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle" style="left: -25px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle" style="left: 371px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle" style="left: 703px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle" style="left: -25px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle" style="left: 1034px; height: 36px;">
+                    <div class="grip"></div>
+                    <div class="grip-resizable"></div>
+                </div>
+                <div class="grip-handle grip-lastgrip" style="left: 1367px; height: 36px;"></div>
+            </div>
+            <table id="parent-resizable" class="table table-hover table-bordered table-condensed grip-resizable">
+                <colgroup>
+                    <col style="width: 38px; min-width: 38px;">
+                    <col class="" style="display: none;">
+                    <col class="" style="width: 332px; min-width: 332px;">
+                    <col class="" style="width: 332px; min-width: 332px;">
+                    <col class="" style="width: 267px; min-width: 267px; display: none;">
+                    <col class="" style="width: 331px; min-width: 331px;">
+                    <col class="" style="width: 333px; min-width: 333px;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th rowspan="1" data-is-only-head="false" style="text-align: center; width: 38px;"><input
+                            type="checkbox" class="react-bs-select-all" value="on"></th>
+                    <th class="" data-is-only-head="false" title="Key" data-field="key"
+                        style="text-align: center; display: none;">Key
+                        <div></div>
+                    </th>
+                    <th class="sort-column" data-is-only-head="false" title="Name" data-field="name"
+                        style="text-align: left; width: 332px;">Name
+                        <span class="order"><span class="dropdown"><span class="caret"
+                                                                         style="margin: 10px 0px 10px 5px; color: rgb(204, 204, 204);"></span></span><span
+                                class="dropup"><span class="caret"
+                                                     style="margin: 10px 0px; color: rgb(204, 204, 204);"></span></span></span>
+                        <div></div>
+                    </th>
+                    <th class="sort-column" data-is-only-head="false" title="Value" data-field="value"
+                        style="text-align: center; width: 332px;">Value<span
+                            class="order"><span class="dropdown"><span class="caret"
+                                                                       style="margin: 10px 0px 10px 5px; color: rgb(204, 204, 204);"></span></span><span
+                            class="dropup"><span class="caret"
+                                                 style="margin: 10px 0px; color: rgb(204, 204, 204);"></span></span></span>
+                        <div></div>
+                    </th>
+                    <th class="sort-column" data-is-only-head="false" title="Type" data-field="type"
+                        style="text-align: center; width: 267px; display: none;">Type
+                        <span class="order"><span class="dropdown"><span class="caret"
+                                                                         style="margin: 10px 0px 10px 5px; color: rgb(204, 204, 204);"></span></span><span
+                                class="dropup"><span class="caret"
+                                                     style="margin: 10px 0px; color: rgb(204, 204, 204);"></span></span></span>
+                        <div></div>
+                    </th>
+                    <th class="sort-column" data-is-only-head="false" title="Present"
+                        data-field="present" style="text-align: center; width: 331px;">
+                        Present<span class="order"><span
+                            class="dropdown"><span class="caret"
+                                                   style="margin: 10px 0px 10px 5px; color: rgb(204, 204, 204);"></span></span><span
+                            class="dropup"><span class="caret"
+                                                 style="margin: 10px 0px; color: rgb(204, 204, 204);"></span></span></span>
+                        <div></div>
+                    </th>
+                    <th class="sort-column" data-is-only-head="false" title="Reference" data-field="reference"
+                        style="text-align: left; width: 333px;">Reference<span
+                            class="order"><span class="dropdown"><span class="caret"
+                                                                       style="margin: 10px 0px 10px 5px; color: rgb(204, 204, 204);"></span></span><span
+                            class="dropup"><span class="caret"
+                                                 style="margin: 10px 0px; color: rgb(204, 204, 204);"></span></span></span>
+                        <div></div>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="react-bs-container-body" style="height: 100%;">
+            <table id="parent-resizableremote" class="table table-striped table-bordered table-hover table-condensed">
+                <colgroup>
+                    <col style="width: 30px; min-width: 30px;">
+                    <col class="" style="display: none;">
+                    <col class="">
+                    <col class="">
+                    <col class="" style="display: none;">
+                    <col class="">
+                    <col class="">
+                </colgroup>
+                <tbody>
+                <tr class="">
+                    <td class="" style="text-align: center; width: 30px;"><input type="checkbox" value="on"></td>
+                    <td class="" style="text-align: center; display: none;">7af2bea5-9600-43fc-a7bb-dc84a7e958e1</td>
+                    <td class="" style="text-align: left; width: 267px;">DeSoto</td>
+                    <td class="" style="text-align: center; width: 267px;">
+                        <div>42</div>
+                    </td>
+                    <td class="" style="text-align: center; width: 267px; display: none;">defunct</td>
+                    <td class="" style="text-align: center; width: 267px;">false</td>
+                    <td class="" style="text-align: left; width: 268px;">automobile</td>
+                </tr>
+                <tr class="">
+                    <td class="" style="text-align: center;"><input type="checkbox" value="on"></td>
+                    <td class="" style="text-align: center; display: none;">737b138c-7cfb-4fdf-9d62-66bdb1d2d429</td>
+                    <td class="" style="text-align: left;">Ford</td>
+                    <td class="" style="text-align: center;">
+                        <div>44</div>
+                    </td>
+                    <td class="" style="text-align: center; display: none;">exists</td>
+                    <td class="" style="text-align: center;">true</td>
+                    <td class="" style="text-align: left;">truck</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

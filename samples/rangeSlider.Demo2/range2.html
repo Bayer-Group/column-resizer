@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>colResizable &#8211; range slider demo</title>  
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+	<script  src="../../dist/column-resizer.js"></script>
+	<script type="text/javascript">
+      window.onload = function() {
+        var colResizable = ColumnResizer.default;
+
+          var onSlide = function(e){
+              var columns = e.currentTarget.querySelectorAll("td");
+              var ranges = [], total = 0, i, w;
+              for(i = 0; i<columns.length; i++){
+                  w = Number(window.getComputedStyle(columns[i]).width.replace(/px/, '')).valueOf() - 14 - (i==0 ? 1 : 0);
+                  ranges.push(w);
+                  total+=w;
+              }
+              for(i=0; i<columns.length; i++){
+                  ranges[i] = 100*ranges[i]/total;
+              }
+              document.querySelector("#text").innerHTML = "Selected range: " + Math.round(ranges[1]*10)/10 +"% starting at: " + Math.round(ranges[0]*10)/10 +"%";
+          };
+          //colResize the table
+          new colResizable(document.querySelector("#range"),{
+              liveDrag:true,
+              draggingClass:"rangeDrag",
+              gripInnerHtml:"<div class='rangeGrip'></div>",
+              onResize:onSlide,
+              minWidth:8
+          });
+      };
+  </script>
+  
+</head>
+<body>
+	<div class="center">
+		<br/><br/>
+		
+		
+		<table id="range" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tr>
+				<td width="25%"></td>
+				<td id="selection" width="50%"><span/></td>
+				<td width="25%"></td>
+			</tr>
+		</table>	
+		
+		
+		<p id="text">Selected range: 50.0% starting at: 25.0%</p>
+		
+		<br/><br/>
+
+	</div>	
+		
+
+	
+		
+ </body>
+ </html>

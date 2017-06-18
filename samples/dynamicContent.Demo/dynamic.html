@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>dynamic content demo</title>  
+
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script  src="../../dist/column-resizer.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        var colResizable = ColumnResizer.default;
+
+          var dynamicTable = document.querySelector("#dynamicTable");
+          var addColumn = document.querySelector("#addColumn");
+          var addRow = document.querySelector("#addRow");
+
+          var resizer = new colResizable(dynamicTable, {disable:true});
+
+          var applyColresizable = function(){
+              resizer.reset({
+                  liveDrag:true,
+                  gripInnerHtml:"<div class='grip'></div>",
+                  draggingClass:"dragging",
+                  resizeMode:'fit'
+              });
+          };
+
+          addColumn.addEventListener('click', function() {
+              resizer.reset({disable:true});
+              var i = 0;
+              var tr = dynamicTable.querySelectorAll("tr");
+              for(i=0; i<tr.length; i++){
+                  var row = tr[i];
+                  var cell = i ? document.createElement('td') : document.createElement('th');
+                  cell.innerHTML = i ? "cell" : "header";
+                  row.appendChild(cell);
+              };
+              //since now we have more columns, lets share the table width proportionally
+              var th = dynamicTable.querySelectorAll("th");
+              for (i=0; i<th.length; i++) {
+                  th[i].style.width = (100 / th.length + "%");
+			  }
+              //apply colResizable again to be able to drag columns
+              applyColresizable();
+		  });
+
+          addRow.addEventListener('click', function() {
+              resizer.reset({disable:true});
+              //duplicate the last row
+              var tr = dynamicTable.querySelectorAll("tr");
+              var html = tr[tr.length-1].innerHTML;
+              var row = document.createElement('tr');
+              row.innerHTML = html;
+              dynamicTable.appendChild(row);
+              applyColresizable();
+		  });
+
+          applyColresizable();
+      };
+  </script>
+  
+</head>
+<body>
+	<div class="center" >
+	
+        <h3>Dynamically generated content. (add/remove columns and rows)</h3>
+        <br/>
+    
+		 <table id="dynamicTable" width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<th>header</th><th>header</th><th>header</th>
+			</tr>
+			<tr>
+				<td >cell</td><td>cell</td><td >cell</td>
+			</tr>
+			<tr>
+				<td >cell</td><td>cell</td><td >cell</td>
+			</tr>
+			<tr>
+				<td >cell</td><td >cell</td><td >cell</td>
+			</tr>																	
+		</table>
+        <br/>
+        <button  id="addColumn">add column</button>
+        <button  id="addRow">add row</button>
+
+    
+		<br/>
+
+
+	</div>	
+		
+
+	
+		
+ </body>
+ </html>

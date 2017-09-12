@@ -14,12 +14,12 @@ ColumnResizer is a fork of the jQuery plugin [colResizable](http://bacubacu.com/
 
 Column-resizer can be used directly as a script in a page:
 
-```
+```html
 <head>
   <script src="js/column-resizer.js"></script>
   <script type="text/javascript">
      window.onload = function() {
-        var resizable = ColumnResizer.default;
+        let resizable = ColumnResizer.default;
         
           new resizable(document.querySelector("#somethingUnique"),{
               liveDrag:true,
@@ -41,7 +41,7 @@ Column-resizer can be used directly as a script in a page:
 
 It can also be used as an ES6 module as in this React example:
 
-```
+```javascript
 import ColumnResizer from 'column-resizer';
 import React, { Component } from 'react';
 
@@ -87,6 +87,8 @@ class MyTable extends Component {
 
     disableResize() {
         if (this.resizer) {
+            // this will return the current state of the options including column widths
+            // these widths can be saved so the table can be initialized with them
             this.resizer.reset({ disable: true });
         }
     }
@@ -174,6 +176,11 @@ ___
 * **remoteTable**: [type: Node / null] [default: null] 
 
 Table element whose column widths will be set by the current table. Remote table must have the same number of columns.
+___
+
+* **widths**: [type: array of int] [default: []] 
+
+An array of column widths to set the initial width.
 ___
 
 ### Events

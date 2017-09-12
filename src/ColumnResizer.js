@@ -29,8 +29,13 @@ export default class ColumnResizer {
         this.init(options);
     }
 
+    /**
+     * Reinitialize the object with options.
+     * @param {Object} options
+     * @returns {Object} current option object
+     */
     reset = options => {
-        this.init(options);
+        return this.init(options);
     };
 
     onResize = () => {
@@ -179,7 +184,7 @@ export default class ColumnResizer {
         const tb = this.tb;
         const id = tb.getAttribute(this.ID) || this.RESIZABLE + counter();
         if (!tb.matches('table') || tb.extended && !options.partialRefresh) {
-            return;
+            return null;
         }
         //append required CSS rules
         const head = document.querySelector('head');
@@ -195,6 +200,7 @@ export default class ColumnResizer {
             this.createStyle(head, css);
         }
         tb.setAttribute(this.ID, id);
+        const oldOptions = tb.opt;
         tb.opt = this.extendOptions(options);
         const headers = this.getTableHeaders(tb);
         this.extendTable(headers);
@@ -206,6 +212,7 @@ export default class ColumnResizer {
                 console.warn('column count for remote table did not match');
             }
         }
+        return oldOptions;
     };
 
     /**
@@ -257,6 +264,7 @@ export default class ColumnResizer {
         t.gripContainer.style.width = t.tableWidth + this.PX;
         for (let i = 0; i < t.columnCnt; i++) {
             const c = t.columns[i];
+            t.opt.widths[i] = c.w;
             const cRect = c.getBoundingClientRect();
             const tRect = t.getBoundingClientRect();
             t.grips[i].style.left = cRect.left - tRect.left + c.offsetWidth + t.cellSpace / 2 + this.PX;
@@ -265,7 +273,7 @@ export default class ColumnResizer {
     };
 
     /**
-     * This function allows to remove any enhancements performed by this plugin on a previously processed table.
+     * This function removes any enhancements from the table being processed.
      */
     destroy = () => {
         const tt = this.tb;
@@ -284,6 +292,7 @@ export default class ColumnResizer {
             tt.gripContainer.parentNode.removeChild(tt.gripContainer);
         }
         delete tt.extended;
+        return tt.opt;
     };
 
     createStyle = (element, css) => {
@@ -338,6 +347,7 @@ export default class ColumnResizer {
     /**
      * filter invisible columns
      * @param nodes
+     * @param column
      */
     filterInvisible = (nodes, column) => {
         return nodes.filter((node) => {
@@ -414,9 +424,12 @@ export default class ColumnResizer {
         if (this.store[t.getAttribute(this.ID)]) {
             this.deserializeStore(th);
         }
+        if (!t.opt.widths) {
+            t.opt.widths = [];
+        }
         th.forEach((header, index) => {
             const column = th[index];
-            const dc = t.opt.disabledColumns.indexOf(index) != -1;
+            const dc = t.opt.disabledColumns.indexOf(index) !== -1;
             this.createDiv(t.gripContainer, 'grip-handle');
             const handle = t.gripContainer.lastChild;
             if (!dc && t.opt.gripInnerHtml) { //add the visual node to be used as grip
@@ -431,12 +444,12 @@ export default class ColumnResizer {
                     handle.innerHTML = '';
                 }
             }
-            handle.addEventListener('touchstart', this.onGripMouseDown, true);
+            handle.addEventListener('touchstart', this.onGripMouseDown, {capture: true, passive: true});
             handle.addEventListener('mousedown', this.onGripMouseDown, true);
 
             if (!dc) {
                 handle.classList.remove('grip-disabledgrip');
-                handle.addEventListener('touchstart', this.onGripMouseDown, true);
+                handle.addEventListener('touchstart', this.onGripMouseDown, {capture: true, passive: true});
                 handle.addEventListener('mousedown', this.onGripMouseDown, true);
             } else {
                 handle.classList.add('grip-disabledgrip');
@@ -444,7 +457,12 @@ export default class ColumnResizer {
 
             handle.t = t;
             handle.i = index;
-            column.w = Number(window.getComputedStyle(column).width.replace(/px/, '')).valueOf();
+            if (t.opt.widths[index]) {
+                column.w = t.opt.widths[index];
+            } else {
+                column.w = Number(window.getComputedStyle(column).width.replace(/px/, '')).valueOf();
+                t.opt.widths[index] = column.w;
+            }
             column.style.width = column.w + this.PX;
             column.removeAttribute('width');
             handle.data = {i: index, t: t.getAttribute(this.ID), last: index === t.columnCnt - 1};
@@ -564,7 +582,7 @@ export default class ColumnResizer {
             c1.w = options.fixed ? w1 : c1.w;
             if (remote) {
                 remote.columns[i].w = w0;
-                remote.columns[i = 1].w = options.fixed ? w1 : c1.w;
+                remote.columns[i + 1].w = options.fixed ? w1 : c1.w;
             }
         }
     };
@@ -574,20 +592,21 @@ ColumnResizer.DEFAULTS = {
     //attributes:
     resizeMode: 'fit',              //mode can be 'fit', 'flex' or 'overflow'
     draggingClass: 'grip-drag',	    //css-class used when a grip is being dragged (for visual feedback purposes)
-    gripInnerHtml: '',				      //if it is required to use a custom grip it can be done using some custom HTML
-    liveDrag: false,				        //enables table-layout updating while dragging
-    minWidth: 15, 					        //minimum width value in pixels allowed for a column
-    headerOnly: false,				      //specifies that the size of the the column resizing anchors will be bounded to the size of the first row
-    hoverCursor: 'col-resize',  	  //cursor to be used on grip hover
-    dragCursor: 'col-resize',  		  //cursor to be used while dragging
-    flush: false, 					        //when it is required to prevent layout restoration after postback, 'flush' will remove its associated layout data
-    marginLeft: null,				        //e.g. '10%', '15em', '5px' ...
-    marginRight: null, 				      //e.g. '10%', '15em', '5px' ...
+    gripInnerHtml: '',				//if it is required to use a custom grip it can be done using some custom HTML
+    liveDrag: false,				//enables table-layout updating while dragging
+    minWidth: 15, 					//minimum width value in pixels allowed for a column
+    headerOnly: false,				//specifies that the size of the the column resizing anchors will be bounded to the size of the first row
+    hoverCursor: 'col-resize',  	//cursor to be used on grip hover
+    dragCursor: 'col-resize',  		//cursor to be used while dragging
+    flush: false, 					//when it is required to prevent layout restoration after postback, 'flush' will remove its associated layout data
+    marginLeft: null,				//e.g. '10%', '15em', '5px' ...
+    marginRight: null, 				//e.g. '10%', '15em', '5px' ...
     remoteTable: null,              //other table element to resize using the main table as a controller
-    disable: false,					        //disables all the enhancements performed in a previously resized table
-    partialRefresh: false,			    //can be used when the table is inside of an updatePanel,
+    disable: false,					//disables all the enhancements performed in a previously resized table
+    partialRefresh: false,			//can be used when the table is inside of an updatePanel,
     disabledColumns: [],            //column indexes to be excluded
     removePadding: true,            //remove padding from the header cells.
+    widths: [],                     //array of initial column widths
 
     //events:
     onDrag: null, 					//callback function to be fired during the column resizing process if liveDrag is enabled

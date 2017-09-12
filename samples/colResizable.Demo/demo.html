@@ -16,18 +16,19 @@
   <script  src="../../dist/column-resizer.js"></script>
   <script type="text/javascript">
       window.onload = function() {
-          var colResizable = ColumnResizer.default;
+          let colResizable = ColumnResizer.default;
 
-          var normal = document.querySelector(".foo");
-          var flex = document.querySelector(".bar");
-          var overflow = document.querySelector("#overflow");
-          var disabled = document.querySelector("#disabled");
+          let normal = document.querySelector(".foo");
+          let flex = document.querySelector(".bar");
+          let overflow = document.querySelector("#overflow");
+          let disabled = document.querySelector("#disabled");
 
           new colResizable(normal, {
               liveDrag:true,
               gripInnerHtml:"<div class='grip'></div>",
               draggingClass:"dragging",
-              resizeMode:'fit'
+              resizeMode:'fit',
+              widths:[275, 350, 500]
           });
           new colResizable(flex, {
               liveDrag:true,

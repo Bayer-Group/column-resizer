@@ -74,12 +74,14 @@ class MyTable extends Component {
     }
 
     enableResize() {
-        const normalRemote = ReactDOM.findDOMNode(this).querySelector(`#${this.bodyId}`);
+        const normalRemote = ReactDOM.findDOMNode(this)
+            .querySelector(`#${this.bodyId}`);
         const options = this.props.resizerOptions;
         options.remoteTable = normalRemote;
         if (!this.resizer) {
             this.resizer = new ColumnResizer(
-                ReactDOM.findDOMNode(this).querySelector(`#${this.headerId}`), options);
+                ReactDOM.findDOMNode(this)
+                    .querySelector(`#${this.headerId}`), options);
         } else {
             this.resizer.reset(options);
         }
@@ -87,8 +89,10 @@ class MyTable extends Component {
 
     disableResize() {
         if (this.resizer) {
-            // this will return the current state of the options including column widths
-            // these widths can be saved so the table can be initialized with them
+            // This will return the current state of the 
+            // options including column widths.
+            // These widths can be saved so the table 
+            // can be initialized with them.
             this.resizer.reset({ disable: true });
         }
     }

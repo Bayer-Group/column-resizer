@@ -89,7 +89,7 @@ export default class ColumnResizer {
                 c.w = Number(window.getComputedStyle(c).width.replace(/px/, '')).valueOf();
             }
         }
-        return false; //prevent text selection
+        e.preventDefault(); //prevent text selection
     };
 
     /**

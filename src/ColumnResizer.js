@@ -17,6 +17,11 @@ export default class ColumnResizer {
     FLEX = 'grip-flex';
     IE = navigator.userAgent.indexOf('Trident/4.0') > 0;
 
+    /**
+     *
+     * @param {HTMLTableElement} tb
+     * @param {Object} options
+     */
     constructor(tb, options = {}) {
         try {
             this.store = sessionStorage;
@@ -32,12 +37,15 @@ export default class ColumnResizer {
     /**
      * Reinitialize the object with options.
      * @param {Object} options
-     * @returns {Object} current option object
+     * @returns {Object} previous options object if any
      */
     reset = options => {
         return this.init(options);
     };
 
+    /**
+     * Remove column resizing properties from the table then re-apply them
+     */
     onResize = () => {
         const t = this.tb;
         t.classList.remove(this.RESIZABLE);
@@ -64,7 +72,7 @@ export default class ColumnResizer {
     /**
      * Event handler fired when the grip's dragging is about to start. Its main goal is to set up events
      * and store some values used while dragging.
-     * @param {event} e - grip's mousedown event
+     * @param {UIEvent} e - grip's mousedown/touchstart event
      */
     onGripMouseDown = (e) => {
         const o = e.target.parentNode.data;
@@ -94,7 +102,7 @@ export default class ColumnResizer {
 
     /**
      * Event handler used while dragging a grip. It checks if the next grip's position is valid and updates it.
-     * @param {event} e - mousemove event bound to the window object
+     * @param {UIEvent} e - mousemove/touchmove event bound to the window object
      */
     onGripDrag = (e) => {
         const grip = this.grip;
@@ -134,12 +142,12 @@ export default class ColumnResizer {
                 cb(e);
             }
         }
-        return false;//prevent text selection while dragging
+        e.preventDefault(); //prevent text selection while dragging
     };
 
     /**
      * Event handler fired when the dragging is over, updating table layout
-     * @param {event} e - grip's drag over event
+     * @param {UIEvent} e - grip's drag over event
      */
     onGripDragOver = (e) => {
         const grip = this.grip;
@@ -177,6 +185,11 @@ export default class ColumnResizer {
         this.grip = null;
     };
 
+    /**
+     * Prepares the table set in the constructor for resizing.
+     * @param {Object} options
+     * @returns {Object} previous options object if any
+     */
     init = (options) => {
         if (options.disable) {
             return this.destroy();
@@ -239,6 +252,9 @@ export default class ColumnResizer {
         }
     };
 
+    /**
+     * Writes the current column widths to storage.
+     */
     serializeStore = () => {
         const store = this.store;
         const t = this.tb;
@@ -274,12 +290,13 @@ export default class ColumnResizer {
 
     /**
      * This function removes any enhancements from the table being processed.
+     * @returns {Object} current option object if any
      */
     destroy = () => {
         const tt = this.tb;
         const id = tt.getAttribute(this.ID);
         if (!id) {
-            return;
+            return null;
         }
         this.store[id] = '';
         tt.classList.remove(this.RESIZABLE);
@@ -295,6 +312,11 @@ export default class ColumnResizer {
         return tt.opt;
     };
 
+    /**
+     * Utility method to add a <style> to an element
+     * @param {HTMLElement} element
+     * @param {string} css
+     */
     createStyle = (element, css) => {
         const hash = stringHash(css).toString();
         const oldStyle = element.querySelectorAll('style');
@@ -315,6 +337,11 @@ export default class ColumnResizer {
         element.appendChild(style);
     };
 
+    /**
+     * Populates unset options with defaults and sets resizeMode properties.
+     * @param {Object} options
+     * @returns {Object}
+     */
     extendOptions = (options) => {
         const extOptions = Object.assign({}, ColumnResizer.DEFAULTS, options);
         extOptions.fixed = true;
@@ -331,23 +358,29 @@ export default class ColumnResizer {
         return extOptions;
     };
 
-    getTableHeaders = (t) => {
-        const id = '#' + t.id;
-        let th = Array.from(t.querySelectorAll(id + '>thead>tr:nth-of-type(1)>th'));
-        th = th.concat(Array.from(t.querySelectorAll(id + '>thead>tr:nth-of-type(1)>td')));
+    /**
+     * Finds all the visible table header elements from a given table.
+     * @param {HTMLTableElement} table
+     * @returns {HTMLElement[]}
+     */
+    getTableHeaders = (table) => {
+        const id = '#' + table.id;
+        let th = Array.from(table.querySelectorAll(id + '>thead>tr:nth-of-type(1)>th'));
+        th = th.concat(Array.from(table.querySelectorAll(id + '>thead>tr:nth-of-type(1)>td')));
         if (!th.length) {
-            th = Array.from(t.querySelectorAll(id + '>tbody>tr:nth-of-type(1)>th'));
-            th = th.concat(Array.from(t.querySelectorAll(id + '>tr:nth-of-type(1)>th')));
-            th = th.concat(Array.from(t.querySelectorAll(id + '>tbody>tr:nth-of-type(1)>td')));
-            th = th.concat(Array.from(t.querySelectorAll(id + '>tr:nth-of-type(1)>td')));
+            th = Array.from(table.querySelectorAll(id + '>tbody>tr:nth-of-type(1)>th'));
+            th = th.concat(Array.from(table.querySelectorAll(id + '>tr:nth-of-type(1)>th')));
+            th = th.concat(Array.from(table.querySelectorAll(id + '>tbody>tr:nth-of-type(1)>td')));
+            th = th.concat(Array.from(table.querySelectorAll(id + '>tr:nth-of-type(1)>td')));
         }
         return this.filterInvisible(th, false);
     };
 
     /**
-     * filter invisible columns
-     * @param nodes
-     * @param column
+     * Filter invisible columns.
+     * @param {HTMLElement[]} nodes
+     * @param {boolean} column
+     * @return {HTMLElement[]}
      */
     filterInvisible = (nodes, column) => {
         return nodes.filter((node) => {
@@ -359,6 +392,10 @@ export default class ColumnResizer {
         });
     };
 
+    /**
+     * Add properties to the table for resizing
+     * @param {HTMLTableElement} th
+     */
     extendTable = (th) => {
         const tb = this.tb;
         if (tb.opt.removePadding) {
@@ -382,6 +419,12 @@ export default class ColumnResizer {
         this.createGrips(th);
     };
 
+    /**
+     * Add properties to the remote table for resizing
+     * @param {HTMLTableElement} tb - the remote table
+     * @param {HTMLElement[]} th - table header array
+     * @param {HTMLTableElement} controller - the controlling table
+     */
     extendRemoteTable = (tb, th, controller) => {
         const options = controller.opt;
         if (options.removePadding) {
@@ -410,9 +453,10 @@ export default class ColumnResizer {
         });
         controller.remote = tb;
     };
+
     /**
      * Function to create all the grips associated with the table given by parameters
-     * @param {Array} th - table header array
+     * @param {HTMLElement[]} th - table header array
      */
     createGrips = (th) => {
         const t = this.tb;
@@ -493,6 +537,10 @@ export default class ColumnResizer {
         this.syncGrips();
     };
 
+    /**
+     * Get the stored table headers.
+     * @param {HTMLElement[]} th - table header array
+     */
     deserializeStore = (th) => {
         const t = this.tb;
         t.columnGrp.forEach((node) => {
@@ -522,6 +570,12 @@ export default class ColumnResizer {
         }
     };
 
+    /**
+     * Utility method to wrap HTML text in a <div/> and appent to an element.
+     * @param {HTMLElement} element - the HTML element to append the div to
+     * @param {string} className - class name for the new div for styling
+     * @param {string} text - inner HTML text
+     */
     createDiv = (element, className, text) => {
         const div = document.createElement('div');
         div.classList.add(className);
@@ -535,9 +589,9 @@ export default class ColumnResizer {
      * This function updates column's width according to the horizontal position increment of the grip being
      * dragged. The function can be called while dragging if liveDragging is enabled and also from the onGripDragOver
      * event handler to synchronize grip's position with their related columns.
-     * @param {Node} t - table object
+     * @param {HTMLTableElement} t - table object
      * @param {number} i - index of the grip being dragged
-     * @param {bool} isOver - to identify when the function is being called from the onGripDragOver event
+     * @param {boolean} isOver - to identify when the function is being called from the onGripDragOver event
      * @param {Object} options - used for chaining options with remote tables
      */
     syncCols = (t, i, isOver, options) => {

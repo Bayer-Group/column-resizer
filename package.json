@@ -9,7 +9,7 @@
     "email": "jglynn43@frontiernet.net"
   },
   "scripts": {
-    "test": "mocha $(find test -path '*Spec.js')",
+    "test": "mocha-chrome test/sample1.html",
     "build": "cross-env NODE_ENV=production webpack -p",
     "lint": "eslint src/*.js test/*.js"
   },
@@ -18,7 +18,7 @@
     "url": "https://github.com/MonsantoCo/column-resizer.git"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6.0.0"
   },
   "bugs": {
     "url": "https://github.com/MonsantoCo/column-resizer/issues"
@@ -35,18 +35,21 @@
     "resize table columns"
   ],
   "devDependencies": {
-    "babel-core": "~6.24.1",
-    "babel-eslint": "~7.2.3",
-    "babel-loader": "~7.1.2",
-    "babel-preset-es2015": "~6.24.1",
+    "babel-core": "~6.26.3",
+    "babel-eslint": "~8.2.3",
+    "babel-loader": "~7.1.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "~6.24.1",
-    "babel-register": "~6.24.1",
-    "chai": "~4.0.2",
-    "cross-env": "~5.0.0",
-    "eslint": "~3.19.0",
-    "jsdom": "~9.9.1",
-    "mocha": "~3.4.2",
-    "webpack": "~3.5.6"
+    "babel-register": "~6.26.0",
+    "chai": "~4.1.2",
+    "cross-env": "~5.1.5",
+    "eslint": "~4.19.1",
+    "jsdom": "~11.10.0",
+    "mocha": "~5.2.0",
+    "mocha-chrome": "^1.1.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "~4.10.1",
+    "webpack-cli": "^2.1.4"
   },
   "dependencies": {
     "string-hash": "~1.1.3"

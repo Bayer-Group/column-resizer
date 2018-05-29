@@ -1,11 +1,14 @@
-import {jsdom} from 'jsdom';
+import {JSDOM} from 'jsdom';
 import fs from 'fs';
 
 // mocha re-executes every time so we need to create this lazily
 if (!global.document) {
-    global.document = jsdom(fs.readFileSync('test/sample1.html'));
-    global.window = document.defaultView;
-    global.navigator = window.navigator;
+    const dom = new JSDOM(fs.readFileSync('test/sample1.html'), { pretendToBeVisual: true, resources: 'usable' });
+    global.window = dom.window;
+    global.document = dom.window.document;
+    global.navigator = {
+        userAgent: 'node.js',
+    };
     global.getComputedStyle = window.getComputedStyle;
     // eslint-disable-next-line no-console
     console.log('');
@@ -14,11 +17,12 @@ if (!global.document) {
     propagateToGlobal(global.window);
 }
 
-// from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
 function propagateToGlobal(window) {
-    for (let key in window) {
-        if (!window.hasOwnProperty(key)) continue;
-        if (key in global) continue;
-        global[key] = window[key];
-    }
+    const props = Object.getOwnPropertyNames(window)
+        .filter(prop => typeof global[prop] === 'undefined')
+        .reduce((result, prop) => ({
+            ...result,
+            [prop]: Object.getOwnPropertyDescriptor(window, prop),
+        }), {});
+    Object.defineProperties(global, props);
 }

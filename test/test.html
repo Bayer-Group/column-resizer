@@ -32,9 +32,15 @@
     <script src="../dist/column-resizer.js"></script>
     <script type="text/javascript">
       window.onload = function () {
-        var elem = document.querySelector(".test");
-        var colResizable = ColumnResizer.default;
-        new colResizable(elem);
+        const elem = document.querySelector(".test");
+        const colResizable = ColumnResizer.default;
+        new colResizable(elem, {
+            liveDrag: true,
+            gripInnerHtml: "<div class='grip'></div>",
+            draggingClass: "dragging",
+            resizeMode: 'overflow',
+            widths: [275, 350, 500]
+        });
       }
     </script>
 
@@ -46,20 +52,24 @@
     <tr>
         <th>header 1</th>
         <th>header 2</th>
+        <th>header 3</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td>lean</td>
         <td>cell 1</td>
+        <td>cell 4</td>
     </tr>
     <tr>
         <td>chacha</td>
         <td>cell 2</td>
+        <td>cell 5</td>
     </tr>
     <tr>
         <td>okaoka</td>
         <td>cell 3</td>
+        <td>cell 6</td>
     </tr>
     </tbody>
 </table>

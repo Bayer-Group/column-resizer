@@ -3,8 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample 1</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../dist/column-resizer.js"></script>
+    <script type="text/javascript">
+        let ColumnResizer;
+        window.onload = function () {
+            ColumnResizer = window.ColumnResizer.default;
+        }
+    </script>
 </head>
 <body>
+<div id="mocha"></div>
+<script>
+    expect = chai.expect;
+    mocha.setup('bdd');
+
+    describe('extend remote table', () => {
+
+        it('should assign the remote table', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table);
+            const headers = resizer.getTableHeaders(table);
+            const remote = document.querySelector('#parent-resizableremote');
+            resizer.extendRemoteTable(remote, headers, table);
+            expect(table.remote).to.equal(remote);
+        });
+        it('should set the remote id', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table);
+            const headers = resizer.getTableHeaders(table);
+            const remote = document.querySelector('#parent-resizableremote');
+            resizer.extendRemoteTable(remote, headers, table);
+            expect(remote.id).to.equal(table.getAttribute('id') + 'remote');
+        });
+        it('should set the columns to match the headers', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table);
+            const headers = resizer.getTableHeaders(table);
+            const remote = document.querySelector('#parent-resizableremote');
+            resizer.extendRemoteTable(remote, headers, table);
+            expect(remote.columns.length).to.equal(headers.length);
+        });
+        it('should set the style', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table);
+            const headers = resizer.getTableHeaders(table);
+            const remote = document.querySelector('#parent-resizableremote');
+            resizer.extendRemoteTable(remote, headers, table);
+            expect(remote.tableWidth).to.equal(table.tableWidth);
+            expect(remote.cellSpace).to.equal(table.cellSpace);
+            expect(remote.borderSpace).to.equal(table.borderSpace);
+        });
+        it('should set up the column group', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table);
+            const headers = resizer.getTableHeaders(table);
+            const remote = document.querySelector('#parent-resizableremote');
+            resizer.extendRemoteTable(remote, headers, table);
+            expect(remote.columnGrp.length).to.equal(headers.length);
+        });
+    });
+
+    describe('Get Headers', () => {
+        it('should find the headers', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table, {disable: true});
+            const headers = resizer.getTableHeaders(table);
+            expect(headers.length).to.equal(5);
+        });
+        it('should find the remote headers', () => {
+            const table = document.querySelector('#parent-resizable');
+            const resizer = new ColumnResizer(table, {disable: true});
+            const remote = document.querySelector('#parent-resizableremote');
+            const headers = resizer.getTableHeaders(remote);
+            expect(headers.length).to.equal(5);
+        });
+    });
+
+    mocha.run();
+</script>
 <div class="react-bs-table-container">
     <div class="react-bs-table-tool-bar">
         <div class="row">

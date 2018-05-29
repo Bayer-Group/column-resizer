@@ -1,4 +1,12 @@
 <a name="v1.0.3"></a>
+# [v1.1.0](https://github.com/MonsantoCo/column-resizer/compare/v1.0.3...v1.1.0) (2018-05-29)
+## Bug fixes
+
+## Enhancement
+* Updates to dependencies([4eb2351](https://github.com/MonsantoCo/column-resizer/commit/4eb2351f298728318bce55b1067857bcaca86b4f))
+* Better documentation.
+
+<a name="v1.0.3"></a>
 # [v1.0.3](https://github.com/MonsantoCo/column-resizer/compare/v1.0.2...v1.0.3) (2018-05-16)
 ## Bug fixes
 * Fix text selection prevention([c90e486](https://github.com/MonsantoCo/column-resizer/commit/c90e486004482cf41957d55bb55b91637010a0b1))

@@ -244,12 +244,10 @@ export default class ColumnResizer {
         t.classList.remove(this.FLEX);
         t.columns.forEach((col, i) => {
             col.style.width = w[i];
-            col.w = Number(col.style.width.replace(/px/, '')).valueOf();
+            col.w = Number(w[i].replace(/px/, '')).valueOf();
         });
-        if (!t.opt.fixed) {
-            //allow table width changes
-            t.classList.add(this.FLEX);
-        }
+        //allow table width changes
+        t.classList.add(this.FLEX);
     };
 
     /**

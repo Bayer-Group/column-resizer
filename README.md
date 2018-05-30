@@ -164,7 +164,7 @@ ___
 
 * **flush**: [type: boolean] [default: false] 
 
-Flush is only effective when postbackSafe is enabled. Its purpose is to remove all previously stored data related to the current table layout to get it back to its original layout preventing width restoration after postback.
+Flush is to remove all previously stored data related to the current table layout from session storage.
 ___
 
 * **marginLeft**: [type: string / null] [default: null] 

@@ -169,7 +169,7 @@ ___
 
 * **marginLeft**: [type: string / null] [default: null] 
 
-If the target table contains an explicit margin-left CSS rule, the same value must be used in this attribute (for example: "auto", "20%", "10px"). The reason why it is needed it is because most browsers (all except of IE) don’t allow direct access to the current CSS rule applied to an element in its original units (such as "%", "em" or "auto" values).
+If the target table contains an explicit margin-left CSS rule, the same value must be used in this attribute (for example: "auto", "20%", "10px"). The reason why it is needed it is because most browsers (all except of legacy IE) don’t allow direct access to the current CSS rule applied to an element in its original units (such as "%", "em" or "auto" values).
 ___
 
 * **marginRight**: [type: string / null] [default: null] 

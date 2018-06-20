@@ -15,7 +15,7 @@ export default class ColumnResizer {
     PX = 'px';
     RESIZABLE = 'grip-resizable';
     FLEX = 'grip-flex';
-    IE = navigator.userAgent.indexOf('Trident/4.0') > 0;
+    legacyIE = navigator.userAgent.indexOf('Trident/4.0') > 0;
 
     /**
      *
@@ -31,6 +31,10 @@ export default class ColumnResizer {
         this.grip = null;
         this.tb = tb;
         window.addEventListener('resize', this.onResize);
+        // Polyfill for IE
+        if (!Element.prototype.matches) {
+            Element.prototype.matches = Element.prototype.msMatchesSelector;
+        }
         this.init(options);
     }
 
@@ -411,8 +415,8 @@ export default class ColumnResizer {
         if (tb.opt.marginRight) {
             tb.gripContainer.style.marginRight = tb.opt.marginRight;
         }
-        tb.cellSpace = parseInt(this.IE ? tb.cellSpacing || tb.currentStyle.borderSpacing : window.getComputedStyle(tb).borderSpacing.split(' ')[0].replace(/px/, '')) || 2;
-        tb.borderSpace = parseInt(this.IE ? tb.border || tb.currentStyle.borderLeftWidth : window.getComputedStyle(tb).borderLeftWidth.replace(/px/, '')) || 1;
+        tb.cellSpace = parseInt(this.legacyIE ? tb.cellSpacing || tb.currentStyle.borderSpacing : window.getComputedStyle(tb).borderSpacing.split(' ')[0].replace(/px/, '')) || 2;
+        tb.borderSpace = parseInt(this.legacyIE ? tb.border || tb.currentStyle.borderLeftWidth : window.getComputedStyle(tb).borderLeftWidth.replace(/px/, '')) || 1;
         tb.extended = true;
         this.createGrips(th);
     };

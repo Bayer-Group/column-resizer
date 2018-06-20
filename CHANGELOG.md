@@ -1,4 +1,11 @@
-<a name="v1.0.3"></a>
+<a name="v1.1.2"></a>
+# [v1.1.2](https://github.com/MonsantoCo/column-resizer/compare/v1.1.1...v1.1.2) (2018-06-20)
+## Bug fixes
+* Add polyfill for Element.matches for IE ([6901e7b](https://github.com/MonsantoCo/column-resizer/commit/6901e7b70413e8ecde76bcb27d410ddffaca7b9e))
+
+## Enhancement
+
+<a name="v1.1.1"></a>
 # [v1.1.1](https://github.com/MonsantoCo/column-resizer/compare/v1.1.0...v1.1.1) (2018-05-30)
 ## Bug fixes
 
@@ -7,7 +14,7 @@
 * Updated documentation ([cf9db08](https://github.com/MonsantoCo/column-resizer/commit/cf9db088e48f3dbf085d7c9813d6d0e451addeb9))
 * Update test page ([7d99269](https://github.com/MonsantoCo/column-resizer/commit/7d9926984fb4dec20ee8c5488e14161ddbad47b7))
 
-<a name="v1.0.3"></a>
+<a name="v1.1.0"></a>
 # [v1.1.0](https://github.com/MonsantoCo/column-resizer/compare/v1.0.3...v1.1.0) (2018-05-29)
 ## Bug fixes
 

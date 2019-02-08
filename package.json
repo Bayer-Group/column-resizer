@@ -18,7 +18,7 @@
     "url": "https://github.com/MonsantoCo/column-resizer.git"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "bugs": {
     "url": "https://github.com/MonsantoCo/column-resizer/issues"
@@ -35,21 +35,21 @@
     "resize table columns"
   ],
   "devDependencies": {
-    "babel-core": "~6.26.3",
-    "babel-eslint": "~8.2.3",
-    "babel-loader": "~7.1.4",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "~6.24.1",
-    "babel-register": "~6.26.0",
-    "chai": "~4.1.2",
-    "cross-env": "~5.1.5",
-    "eslint": "~4.19.1",
-    "jsdom": "~11.10.0",
+    "@babel/cli": "~7.2.3",
+    "@babel/core": "~7.2.2",
+    "@babel/preset-env": "~7.3.1",
+    "@babel/runtime": "~7.3.1",
+    "babel-eslint": "~10.0.1",
+    "babel-loader": "~8.0.5",
+    "chai": "~4.2.0",
+    "cross-env": "~5.2.0",
+    "eslint": "^5.13.0",
+    "jsdom": "~13.2.0",
     "mocha": "~5.2.0",
-    "mocha-chrome": "^1.1.0",
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "~4.10.1",
-    "webpack-cli": "^2.1.4"
+    "mocha-chrome": "~2.0.0",
+    "uglifyjs-webpack-plugin": "~2.1.1",
+    "webpack": "~4.29.3",
+    "webpack-cli": "~3.2.3"
   },
   "dependencies": {
     "string-hash": "~1.1.3"

@@ -73,15 +73,18 @@ class MyTable extends Component {
         }
     }
 
+    /*
+     * In this example, a table controls the resizing of the local table remotely.
+     */
     enableResize() {
-        const normalRemote = ReactDOM.findDOMNode(this)
-            .querySelector(`#${this.bodyId}`);
+        const remoteTable = ReactDOM.findDOMNode(this)
+            .querySelector(`#${this.remoteTableId}`);
         const options = this.props.resizerOptions;
-        options.remoteTable = normalRemote;
+        options.remoteTable = remoteTable;
         if (!this.resizer) {
             this.resizer = new ColumnResizer(
                 ReactDOM.findDOMNode(this)
-                    .querySelector(`#${this.headerId}`), options);
+                    .querySelector(`#${this.tableId}`), options);
         } else {
             this.resizer.reset(options);
         }

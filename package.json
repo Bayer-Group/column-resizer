@@ -1,6 +1,6 @@
 {
   "name": "column-resizer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Javascript to resize table columns",
   "title": "ColumnResizer",
   "main": "./dist/column-resizer.js",

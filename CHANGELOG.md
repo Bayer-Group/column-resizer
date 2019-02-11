@@ -1,3 +1,12 @@
+<a name="v1.2.0"></a>
+# [v1.2.0](https://github.com/MonsantoCo/column-resizer/compare/v1.1.3...v1.2.0) (2019-02-11)
+## Bug fixes
+
+## Enhancement
+* Update documentation ([0f19572](https://github.com/MonsantoCo/column-resizer/commit/0f1957203b8285c3bd421a30bb15b048b00c167d))
+* Add `serialize` option ([4fbbfff](https://github.com/MonsantoCo/column-resizer/commit/4fbbfffa475f7770a46bcecac43cd31284c62f1d))
+* Update tests to run in browser ([8983a90](https://github.com/MonsantoCo/column-resizer/commit/8983a900543b1d9b36d1b7f066a8e20fd4d4848e))
+
 <a name="v1.1.3"></a>
 # [v1.1.3](https://github.com/MonsantoCo/column-resizer/compare/v1.1.2...v1.1.3) (2019-02-08)
 ## Bug fixes

@@ -65,7 +65,7 @@ export default class ColumnResizer {
             }
         } else {
             this.applyBounds();
-            if (t.opt.resizeMode === 'flex') {
+            if (t.opt.resizeMode === 'flex' && t.opt.serialize) {
                 this.serializeStore();
             }
         }
@@ -184,7 +184,9 @@ export default class ColumnResizer {
             if (cb) {
                 cb(e);
             }
-            this.serializeStore();
+            if (t.opt.serialize) {
+                this.serializeStore();
+            }
         }
         this.grip = null;
     };
@@ -663,6 +665,7 @@ ColumnResizer.DEFAULTS = {
     disabledColumns: [],            //column indexes to be excluded
     removePadding: true,            //remove padding from the header cells.
     widths: [],                     //array of initial column widths
+    serialize: true,
 
     //events:
     onDrag: null, 					//callback function to be fired during the column resizing process if liveDrag is enabled

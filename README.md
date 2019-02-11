@@ -190,6 +190,11 @@ ___
 An array of column widths to set the initial width.
 ___
 
+* **serialize**: [type:Boolean] [default: true] 
+
+Flag to determine if column width data will be saved to session storage.
+___
+
 ### Events
 * **onResize**: [type: function] [default: null] 
 

@@ -1,3 +1,11 @@
+<a name="v1.1.3"></a>
+# [v1.1.3](https://github.com/MonsantoCo/column-resizer/compare/v1.1.2...v1.1.3) (2019-02-08)
+## Bug fixes
+
+## Enhancement
+* Update dependencies ([65d4822](https://github.com/MonsantoCo/column-resizer/commit/65d4822885a97b1b19025d0991a592218a0a1c30))
+* Update Babel ([89d24bf](https://github.com/MonsantoCo/column-resizer/commit/89d24bf144171c5061fb97caaae56b06cd86c70e))
+
 <a name="v1.1.2"></a>
 # [v1.1.2](https://github.com/MonsantoCo/column-resizer/compare/v1.1.1...v1.1.2) (2018-06-20)
 ## Bug fixes

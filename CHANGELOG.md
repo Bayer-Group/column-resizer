@@ -1,3 +1,10 @@
+<a name="v1.2.1"></a>
+# [v1.2.1](https://github.com/MonsantoCo/column-resizer/compare/v1.2.0...v1.2.1) (2019-02-11)
+## Bug fixes
+* Missing `serialize` documentation ([c095f3f](https://github.com/MonsantoCo/column-resizer/commit/c095f3f49cd3f727348cff75d0ecae2afaf41dbb))
+
+## Enhancement
+
 <a name="v1.2.0"></a>
 # [v1.2.0](https://github.com/MonsantoCo/column-resizer/compare/v1.1.3...v1.2.0) (2019-02-11)
 ## Bug fixes

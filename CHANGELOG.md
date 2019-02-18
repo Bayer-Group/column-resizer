@@ -1,3 +1,10 @@
+<a name="v1.2.2"></a>
+# [v1.2.2](https://github.com/MonsantoCo/column-resizer/compare/v1.2.1...v1.2.2) (2019-02-18)
+## Bug fixes
+* Incorrect loading of column widths ([84c19ca](https://github.com/MonsantoCo/column-resizer/commit/84c19cabbc0f0fd0daa3528c5ea3447f0852bcdf))
+
+## Enhancement
+
 <a name="v1.2.1"></a>
 # [v1.2.1](https://github.com/MonsantoCo/column-resizer/compare/v1.2.0...v1.2.1) (2019-02-11)
 ## Bug fixes

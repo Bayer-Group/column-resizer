@@ -284,7 +284,6 @@ export default class ColumnResizer {
         t.gripContainer.style.width = t.tableWidth + this.PX;
         for (let i = 0; i < t.columnCnt; i++) {
             const c = t.columns[i];
-            t.opt.widths[i] = c.w;
             const cRect = c.getBoundingClientRect();
             const tRect = t.getBoundingClientRect();
             t.grips[i].style.left = cRect.left - tRect.left + c.offsetWidth + t.cellSpace / 2 + this.PX;
@@ -469,8 +468,10 @@ export default class ColumnResizer {
             col.removeAttribute('width');
         });
         t.columnCnt = th.length;
+        let storage = false;
         if (this.store[t.getAttribute(this.ID)]) {
             this.deserializeStore(th);
+            storage = true;
         }
         if (!t.opt.widths) {
             t.opt.widths = [];
@@ -507,9 +508,10 @@ export default class ColumnResizer {
             handle.i = index;
             if (t.opt.widths[index]) {
                 column.w = t.opt.widths[index];
+            } else if (storage) {
+                column.w = Number(column.style.width.replace(/px/, '')).valueOf();
             } else {
                 column.w = Number(window.getComputedStyle(column).width.replace(/px/, '')).valueOf();
-                t.opt.widths[index] = column.w;
             }
             column.style.width = column.w + this.PX;
             column.removeAttribute('width');
@@ -564,12 +566,11 @@ export default class ColumnResizer {
             }
         }
         for (let i = 0; i < t.columnCnt; i++) {
-            const width = 100 * Number(w[i]).valueOf() / Number(w[t.columnCnt]).valueOf() + '%';
-            th[i].style.width = width;
+            th[i].style.width = w[i] + this.PX;
             if (t.columnGrp[i]) {
                 // this code is required in order to create an inline CSS rule with higher precedence than
                 // an existing CSS class in the 'col' elements
-                t.columnGrp[i].style.width = width;
+                t.columnGrp[i].style.width = 100 * Number(w[i]).valueOf() / Number(w[t.columnCnt]).valueOf() + '%';
             }
         }
     };

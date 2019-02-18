@@ -41,6 +41,21 @@
             resizeMode: 'overflow',
             widths: [275, 100, 500]
         });
+          let resizable = ColumnResizer.default;
+
+          new resizable(document.querySelector("#somethingUnique1"),{
+              liveDrag:true,
+              draggingClass:"rangeDrag",
+              gripInnerHtml:"<div class='rangeGrip'></div>",
+              minWidth:8
+          });
+
+          new resizable(document.querySelector("#somethingUnique2"),{
+              liveDrag:true,
+              draggingClass:"rangeDrag",
+              gripInnerHtml:"<div class='rangeGrip'></div>",
+              minWidth:8
+          });
       }
     </script>
 
@@ -50,9 +65,9 @@
 <table class="test">
     <thead>
     <tr>
-        <th>header 1</th>
-        <th>header 2</th>
-        <th>header 3</th>
+        <th id="0,1">header 1</th>
+        <th id="0,2">header 2</th>
+        <th id="0,3">header 3</th>
     </tr>
     </thead>
     <tbody>
@@ -74,6 +89,16 @@
     </tbody>
 </table>
 
+<table id="somethingUnique1" width="100%" border="1">
+    <tr> <th id="1,1"> header </th> <th id="1,2"> header </th> </tr>
+    <tr> <td> cell </td> <td> cell </td> </tr>
+    <tr> <td> cell </td> <td> cell </td> </tr>
+</table>
+<table id="somethingUnique2" width="100%" border="1">
+    <tr> <th id="2,1"> header </th> <th id="2,2"> header </th> </tr>
+    <tr> <td> cell </td> <td> cell </td> </tr>
+    <tr> <td> cell </td> <td> cell </td> </tr>
+</table>
 
 </body>
 </html>

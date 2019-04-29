@@ -9,7 +9,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: [
-                  path.resolve(__dirname, "node_modules")
+                    path.resolve(__dirname, "node_modules")
                 ],
                 use: [{loader: "babel-loader"}]
             }
@@ -24,7 +24,8 @@ module.exports = {
         publicPath: "/",
         filename: "column-resizer.js",
         libraryTarget: "umd",
-        library: "ColumnResizer"
+        library: "ColumnResizer",
+        globalObject: "this"
     },
     optimization: {
         nodeEnv: 'production',
@@ -37,7 +38,8 @@ module.exports = {
                         warnings: false
                     },
                     mangle: {
-                        keep_fnames: true                    },
+                        keep_fnames: true 
+                    },
                     output: {
                         comments: false
                     }

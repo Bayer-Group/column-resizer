@@ -1,3 +1,10 @@
+<a name="v1.3.0"></a>
+# [v1.3.0](https://github.com/MonsantoCo/column-resizer/compare/v1.2.2...v1.3.0) (2019-04-29)
+## Bug fixes
+
+## Enhancement
+* Support SRR [0d5fcec](https://github.com/MonsantoCo/column-resizer/pull/14/commits/0d5fcecfd8b8822f1614e2f93d2b5bb2615e37aa) (2019-04-29)
+
 <a name="v1.2.2"></a>
 # [v1.2.2](https://github.com/MonsantoCo/column-resizer/compare/v1.2.1...v1.2.2) (2019-02-18)
 ## Bug fixes

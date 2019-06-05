@@ -34,11 +34,8 @@ module.exports = {
                 sourceMap: true,
                 uglifyOptions: {
                     ecma: 6,
-                    compress: {
-                        warnings: false
-                    },
                     mangle: {
-                        keep_fnames: true 
+                        keep_fnames: true
                     },
                     output: {
                         comments: false

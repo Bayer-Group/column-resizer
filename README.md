@@ -9,6 +9,7 @@ ColumnResizer is a fork of the jQuery plugin [colResizable](http://bacubacu.com/
 * No external resources
 * Lightweight and small footprint
 * Customizable column anchors
+* Server side rendering
 
 ## Usage
 

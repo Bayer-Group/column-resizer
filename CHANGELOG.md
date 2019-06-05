@@ -1,5 +1,5 @@
-<a name="v1.3.0"></a>
-# [v1.3.0](https://github.com/MonsantoCo/column-resizer/compare/v1.2.2...v1.3.0) (2019-04-29)
+<a name="v1.3.1"></a>
+# [v1.3.1](https://github.com/MonsantoCo/column-resizer/compare/v1.2.2...v1.3.1) (2019-04-29)
 ## Bug fixes
 
 ## Enhancement

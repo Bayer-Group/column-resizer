@@ -1,3 +1,10 @@
+<a name="v1.3.3"></a>
+# [v1.3.3](https://github.com/MonsantoCo/column-resizer/compare/v1.3.2...v1.3.3) (2019-07-15)
+## Bug fixes
+
+## Enhancement
+* Security update [9c78f7f](https://github.com/MonsantoCo/column-resizer/commit/9c78f7f70e271f10b6f92e987e4e24be3c3d90d5) (2019-07-15)
+
 <a name="v1.3.2"></a>
 # [v1.3.2](https://github.com/MonsantoCo/column-resizer/compare/v1.3.1...v1.3.2) (2019-06-05)
 ## Bug fixes

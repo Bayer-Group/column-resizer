@@ -75,7 +75,8 @@ class MyTable extends Component {
     }
 
     /*
-     * In this example, a table controls the resizing of the local table remotely.
+     * In this example, one table controls the resizing of the
+     * another table so both tables' columns resize synchronously.
      */
     enableResize() {
         const remoteTable = ReactDOM.findDOMNode(this)
@@ -93,10 +94,12 @@ class MyTable extends Component {
 
     disableResize() {
         if (this.resizer) {
-            // This will return the current state of the 
-            // options including column widths.
-            // These widths can be saved so the table 
-            // can be initialized with them.
+            /* This will return the current options object.
+             *
+             * The options, which include the column widths,
+             * can be used to re-create the table with the 
+             * same column widths as last used.
+             */
             this.resizer.reset({ disable: true });
         }
     }

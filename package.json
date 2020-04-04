@@ -51,7 +51,7 @@
     "mocha": "~7.1.1",
     "mocha-chrome": "~2.2.0",
     "rimraf": "~3.0.2",
-    "uglifyjs-webpack-plugin": "~2.2.0",
+    "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.42.1",
     "webpack-cli": "~3.3.11"
   },

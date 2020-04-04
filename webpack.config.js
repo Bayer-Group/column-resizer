@@ -1,48 +1,47 @@
 const webpack = require('webpack');
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    entry: "./src/ColumnResizer.js",
+    entry: './src/ColumnResizer.js',
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 exclude: [
-                    path.resolve(__dirname, "node_modules")
+                    path.resolve(__dirname, 'node_modules')
                 ],
-                use: [{loader: "babel-loader"}]
+                use: [{loader: 'babel-loader'}]
             }
         ]
     },
     resolve: {
-        extensions: [".js", ".css"]
+        extensions: ['.js', '.css']
     },
-    devtool: "source-map",
+    devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, "dist"),
-        publicPath: "/",
-        filename: "column-resizer.js",
-        libraryTarget: "umd",
-        library: "ColumnResizer",
-        globalObject: "this"
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        filename: 'column-resizer.js',
+        libraryTarget: 'umd',
+        library: 'ColumnResizer',
+        globalObject: 'this'
     },
     optimization: {
         nodeEnv: 'production',
+        minimize: true,
         minimizer: [
-            new UglifyJSPlugin({
+            new TerserPlugin({
                 sourceMap: true,
-                uglifyOptions: {
+                terserOptions: {
+                    keep_fnames: true,
                     ecma: 6,
-                    mangle: {
-                        keep_fnames: true
-                    },
                     output: {
-                        comments: false
+                        comments: false,
                     }
                 }
             })
-        ]
+        ],
     },
     plugins: [
         new webpack.DefinePlugin({

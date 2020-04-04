@@ -1,3 +1,12 @@
+<a name="v1.3.5"></a>
+# [v1.3.5](https://github.com/MonsantoCo/column-resizer/compare/v1.3.4...v1.3.5) (2020-04-04)
+## Bug fixes
+
+## Enhancement
+* Security update [f1e14e1](https://github.com/MonsantoCo/column-resizer/commit/f1e14e160a3d1676dec79a5857c1a4f8ad1bd32c) (2020-04-04)
+
+* Security update [308a105](https://github.com/MonsantoCo/column-resizer/commit/308a1058a0edb4d47b46248f7395a3fcb07970b4) (2020-04-04)
+
 <a name="v1.3.4"></a>
 # [v1.3.4](https://github.com/MonsantoCo/column-resizer/compare/v1.3.3...v1.3.4) (2019-08-28)
 ## Bug fixes

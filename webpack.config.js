@@ -32,11 +32,11 @@ module.exports = {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                sourceMap: true,
+                parallel: true,
                 terserOptions: {
                     keep_fnames: true,
                     ecma: 6,
-                    output: {
+                    format: {
                         comments: false,
                     }
                 }

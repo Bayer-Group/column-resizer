@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "npm run build && mocha-chrome test/sample1.html",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack -p",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack",
     "lint": "eslint src/*.js test/*.js",
     "clean": "rimraf dist/*"
   },
@@ -36,24 +36,25 @@
     "resize table columns"
   ],
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "~7.9.0",
-    "@babel/plugin-proposal-class-properties": "~7.8.3",
-    "@babel/preset-env": "~7.9.0",
-    "@babel/register": "~7.9.0",
-    "@babel/runtime": "~7.9.2",
+    "@babel/cli": "~7.12.8",
+    "@babel/core": "~7.12.9",
+    "@babel/plugin-proposal-class-properties": "~7.12.1",
+    "@babel/preset-env": "~7.12.7",
+    "@babel/register": "~7.12.1",
+    "@babel/runtime": "~7.12.5",
     "babel-eslint": "~10.1.0",
-    "babel-loader": "~8.1.0",
+    "babel-loader": "~8.2.2",
+    "canvas": "~2.6.1",
     "chai": "~4.2.0",
-    "cross-env": "~7.0.2",
-    "eslint": "~6.8.0",
-    "jsdom": "~16.2.2",
-    "mocha": "~7.1.1",
+    "cross-env": "~7.0.3",
+    "eslint": "~7.14.0",
+    "jsdom": "~16.4.0",
+    "mocha": "~8.2.1",
     "mocha-chrome": "~2.2.0",
     "rimraf": "~3.0.2",
-    "terser-webpack-plugin": "^2.3.5",
-    "webpack": "^4.42.1",
-    "webpack-cli": "~3.3.11"
+    "terser-webpack-plugin": "^5.0.3",
+    "webpack": "~5.9.0",
+    "webpack-cli": "~4.2.0"
   },
   "dependencies": {
     "string-hash": "~1.1.3"

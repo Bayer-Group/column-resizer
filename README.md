@@ -208,4 +208,9 @@ ___
 * **onDrag**: [type: function] [default: null] 
 
 This event is fired while dragging a column anchor if liveDrag is enabled. It can be useful if the table is being used as a multiple range slider. The callback function can obtain a reference to the updated table through the currentTarget attribute of the event retrieved by parameters
+___
+
+* **resizeToMinWidth**: [type:Boolean] [default: false] 
+
+Allow resizeMode flex/overflow to reduce column size up to minimum width.
 

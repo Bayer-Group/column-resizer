@@ -173,7 +173,7 @@ export default class ColumnResizer {
             if (last) {
                 const c = t.columns[i];
                 const cw = c.w;
-                // reduce table size also, when reducing last column size
+                // fix - adjust table size also, when reducing last column size
                 t.tableWidth = t.tableWidth - (cw - grip.w);
                 this.tb.style.minWidth = t.tableWidth + this.PX;
                 this.tb.style.width = this.tb.style.width;
@@ -476,6 +476,7 @@ export default class ColumnResizer {
         });
         t.columnCnt = th.length;
         let storage = false;
+        let totalWidth = 0;
         if (this.store[t.getAttribute(this.ID)]) {
             this.deserializeStore(th);
             storage = true;
@@ -525,6 +526,7 @@ export default class ColumnResizer {
             handle.data = {i: index, t: t.getAttribute(this.ID), last: index === t.columnCnt - 1};
             t.grips.push(handle);
             t.columns.push(column);
+            totalWidth += column.w;
         });
         let ot = Array.from(t.querySelectorAll('td'));
         ot.concat(Array.from(t.querySelectorAll('th')));
@@ -547,6 +549,11 @@ export default class ColumnResizer {
             t.removeAttribute('width');
             if (!t.opt.resizeToMinWidth) {
                 t.classList.add(this.FLEX);
+            } else {
+                // fix - adjust the table size according to the total size of the columns
+                t.tableWidth = totalWidth;
+                t.style.width = totalWidth;
+                t.style.minWidth = totalWidth;
             }
         }
         this.syncGrips();

@@ -172,6 +172,11 @@ export default class ColumnResizer {
             const last = i === t.columnCnt - 1;
             if (last) {
                 const c = t.columns[i];
+                const cw = c.w;
+                // fix - adjust table size also, when reducing last column size
+                t.tableWidth = t.tableWidth - (cw - grip.w);
+                this.tb.style.minWidth = t.tableWidth + this.PX;
+                this.tb.style.width = this.tb.style.width;
                 c.style.width = grip.w + this.PX;
                 c.w = grip.w;
             } else {
@@ -252,8 +257,10 @@ export default class ColumnResizer {
             col.style.width = w[i];
             col.w = Number(w[i].replace(/px/, '')).valueOf();
         });
-        //allow table width changes
-        t.classList.add(this.FLEX);
+        if (!t.opt.resizeToMinWidth) {
+            //allow table width changes
+            t.classList.add(this.FLEX);
+        }
     };
 
     /**
@@ -469,6 +476,7 @@ export default class ColumnResizer {
         });
         t.columnCnt = th.length;
         let storage = false;
+        let totalWidth = 0;
         if (this.store[t.getAttribute(this.ID)]) {
             this.deserializeStore(th);
             storage = true;
@@ -518,6 +526,7 @@ export default class ColumnResizer {
             handle.data = {i: index, t: t.getAttribute(this.ID), last: index === t.columnCnt - 1};
             t.grips.push(handle);
             t.columns.push(column);
+            totalWidth += column.w;
         });
         let ot = Array.from(t.querySelectorAll('td'));
         ot.concat(Array.from(t.querySelectorAll('th')));
@@ -538,7 +547,14 @@ export default class ColumnResizer {
         });
         if (!t.opt.fixed) {
             t.removeAttribute('width');
-            t.classList.add(this.FLEX);
+            if (!t.opt.resizeToMinWidth) {
+                t.classList.add(this.FLEX);
+            } else {
+                // fix - adjust the table size according to the total size of the columns
+                t.tableWidth = totalWidth;
+                t.style.width = totalWidth;
+                t.style.minWidth = totalWidth;
+            }
         }
         this.syncGrips();
     };
@@ -635,6 +651,8 @@ export default class ColumnResizer {
         } else if (options.overflow) {
             //if overflow is set, increment min-width to force overflow
             t.style.minWidth = (t.tableWidth + inc) + this.PX;
+            //set table width = minWidth
+            t.style.width = t.style.minWidth;
         }
         if (isOver) {
             c0.w = w0;
@@ -670,5 +688,6 @@ ColumnResizer.DEFAULTS = {
 
     //events:
     onDrag: null, 					//callback function to be fired during the column resizing process if liveDrag is enabled
-    onResize: null					//callback function fired when the dragging process is over
+    onResize: null,					//callback function fired when the dragging process is over
+    resizeToMinWidth: false         //allow non-fit resize mode to resize columns up to minWidth 
 };
